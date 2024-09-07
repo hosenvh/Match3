@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using I2.Loc;
+using Match3.Game;
+using Match3.Profiler;
+
+
+namespace Match3.LevelInfoAds.RewardHandler
+{
+    public class LevelInfoAdsBoosterRewardHandler : LevelInfoAdsRewardHandler
+    {
+        protected override List<Type> GetPossibleRewardsTypes()
+        {
+            return new List<Type>
+            {
+                typeof(DoubleBombBoosterReward),
+                typeof(RainbowBoosterReward),
+                typeof(TntRainbowBoosterReward)
+            };
+        }
+
+        protected override LevelReservedRewardsHandler GetCorrespondingLevelReservedRewardHandler()
+        {
+            return Base.gameManager.levelSessionProfiler.BoostersReservedRewardsHandler;
+        }
+
+        public override string GetRewardConfirmPopupMessage()
+        {
+            return string.Format(ScriptLocalization.UI_LevelInfo.YouGotARewardForThisLevel, ScriptLocalization.UI_General.Booster);
+        }
+    }
+}
